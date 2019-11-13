@@ -5,6 +5,9 @@ public class TextureModel {
   private final RawModel model;
   private final int tex;
 
+  private float roughness = 0;
+  private float damping = 1;
+
   public TextureModel(RawModel model, int tex) {
     this.model = model;
     this.tex = tex;
@@ -16,5 +19,21 @@ public class TextureModel {
 
   public int getTex() {
     return tex;
+  }
+
+  public float getRoughness() {
+    return roughness;
+  }
+
+  public float getDamping() {
+    return damping;
+  }
+
+  public void setRoughness(float roughness) {
+    this.roughness = roughness;
+  }
+
+  public void setDamping(float damping) {
+    this.damping = damping;
   }
 }

@@ -26,6 +26,9 @@ public class Render {
 
     float aspectRatio = (float) display.getWidth() / (float) display.getHeight();
     projectionMatrix.setPerspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
+
+    GL11.glEnable(GL11.GL_CULL_FACE);
+    GL11.glCullFace(GL11.GL_BACK);
   }
 
   public Camera getCam() {
@@ -47,19 +50,23 @@ public class Render {
     display.close();
   }
 
-  public void render(Entity model, StaticShader shader) {
+  public void render(Entity model, StaticShader shader, Light light) {
     shader.start();
     GL30.glBindVertexArray(model.getModel().getModel().getVaoID());
     GL20.glEnableVertexAttribArray(0);
     GL20.glEnableVertexAttribArray(1);
+    GL20.glEnableVertexAttribArray(2);
     shader.loadProjection(projectionMatrix);
     shader.loadView(cam.getViewMatrix());
     shader.loadTransform(model.getTransform());
+    shader.loadRoughness(model.getModel().getRoughness(), model.getModel().getDamping());
+    shader.loadLight(light);
     GL13.glActiveTexture(GL13.GL_TEXTURE0);
     GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getModel().getTex());
     GL11.glDrawElements(GL11.GL_TRIANGLES, model.getModel().getModel().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
     GL20.glDisableVertexAttribArray(0);
     GL20.glDisableVertexAttribArray(1);
+    GL20.glDisableVertexAttribArray(2);
     GL30.glBindVertexArray(0);
     shader.stop();
   }

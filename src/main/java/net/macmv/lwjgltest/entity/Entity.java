@@ -12,6 +12,11 @@ public class Entity {
     this.transform = transform;
   }
 
+  public Entity(TextureModel model) {
+    this.model = model;
+    this.transform = new Matrix4f();
+  }
+
   public TextureModel getModel() {
     return model;
   }

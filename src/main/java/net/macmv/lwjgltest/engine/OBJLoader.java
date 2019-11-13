@@ -7,7 +7,6 @@ import de.javagl.obj.ObjUtils;
 import net.macmv.lwjgltest.model.RawModel;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.FloatBuffer;
@@ -29,7 +28,7 @@ public class OBJLoader {
     FloatBuffer vertices = ObjData.getVertices(obj);
     FloatBuffer texCoords = ObjData.getTexCoords(obj, 2);
     FloatBuffer normals = ObjData.getNormals(obj);
-    return loader.loadToModel(vertices, texCoords, indices);
+    return loader.loadToModel(vertices, texCoords, normals, indices);
   }
 
 }

@@ -1,14 +1,10 @@
 package net.macmv.lwjgltest.testEngine;
 
-import net.macmv.lwjgltest.engine.InputManager;
-import net.macmv.lwjgltest.engine.ModelLoader;
-import net.macmv.lwjgltest.engine.OBJLoader;
-import net.macmv.lwjgltest.engine.Render;
+import net.macmv.lwjgltest.engine.*;
 import net.macmv.lwjgltest.entity.Entity;
-import net.macmv.lwjgltest.model.RawModel;
 import net.macmv.lwjgltest.model.TextureModel;
 import net.macmv.lwjgltest.shaders.StaticShader;
-import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public class TestDisplay {
 
@@ -18,19 +14,20 @@ public class TestDisplay {
     InputManager input = new InputManager(r);
     StaticShader shader = new StaticShader();
 
-    RawModel rawModel = OBJLoader.load("model.obj", l);
-    int tex = l.loadTexture("modelTex.png");
-    TextureModel model = new TextureModel(rawModel, tex);
-    Matrix4f transform = new Matrix4f();
-    Entity e = new Entity(model, transform);
+    TextureModel model = new TextureModel(OBJLoader.load("model.obj", l), l.loadTexture("modelTex.png"));
+    model.setRoughness(0);
+    model.setDamping(10);
+    Entity e = new Entity(model);
 
-    transform.setTranslation(0, 0, -10);
-    transform.rotate((float) Math.toRadians(90), 0, 1, 0);
+    Light light = new Light(new Vector3f(0, 5, 0), new Vector3f(1, 1, 1));
+
+    e.getTransform().setTranslation(0, 0, -10);
 
     while (r.getDisplay().isOpen()) {
+      e.getTransform().rotate((float) Math.toRadians(1), 0, 1, 0);
       input.update();
       r.prepare();
-      r.render(e, shader);
+      r.render(e, shader, light);
       r.update();
     }
 

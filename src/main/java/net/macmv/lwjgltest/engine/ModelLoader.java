@@ -20,11 +20,12 @@ public class ModelLoader {
   private final List<Integer> vbos = new ArrayList<>();
   private final List<Integer> textures = new ArrayList<>();
 
-  public RawModel loadToModel(FloatBuffer positions, FloatBuffer texCords, IntBuffer indices) {
+  public RawModel loadToModel(FloatBuffer positions, FloatBuffer texCords, FloatBuffer normals, IntBuffer indices) {
     int vao = createVao();
     bindIndicesBuffer(indices);
     storeVboInVao(0, 3, positions);
     storeVboInVao(1, 2, texCords);
+    storeVboInVao(2, 3, normals);
     unbindVao();
     return new RawModel(vao, indices.capacity());
   }
