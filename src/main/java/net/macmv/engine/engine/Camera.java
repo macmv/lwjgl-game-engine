@@ -1,4 +1,4 @@
-package net.macmv.lwjgltest.engine;
+package net.macmv.engine.engine;
 
 import org.joml.Matrix4f;
 

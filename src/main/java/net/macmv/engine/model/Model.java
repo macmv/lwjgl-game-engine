@@ -1,6 +1,6 @@
-package net.macmv.lwjgltest.model;
+package net.macmv.engine.model;
 
-public class TextureModel {
+public class Model {
 
   private final RawModel model;
   private final int tex;
@@ -8,7 +8,7 @@ public class TextureModel {
   private float roughness = 0;
   private float damping = 1;
 
-  public TextureModel(RawModel model, int tex) {
+  public Model(RawModel model, int tex) {
     this.model = model;
     this.tex = tex;
   }

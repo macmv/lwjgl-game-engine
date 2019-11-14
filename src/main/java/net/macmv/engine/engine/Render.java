@@ -1,7 +1,7 @@
-package net.macmv.lwjgltest.engine;
+package net.macmv.engine.engine;
 
-import net.macmv.lwjgltest.entity.Entity;
-import net.macmv.lwjgltest.shaders.StaticShader;
+import net.macmv.engine.entity.Entity;
+import net.macmv.engine.shaders.StaticShader;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;

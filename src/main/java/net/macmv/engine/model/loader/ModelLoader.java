@@ -1,7 +1,6 @@
-package net.macmv.lwjgltest.engine;
+package net.macmv.engine.model.loader;
 
-import net.macmv.lwjgltest.model.RawModel;
-import org.lwjgl.BufferUtils;
+import net.macmv.engine.model.RawModel;
 import org.lwjgl.opengl.*;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.stb.STBImageResize;
@@ -20,7 +19,7 @@ public class ModelLoader {
   private final List<Integer> vbos = new ArrayList<>();
   private final List<Integer> textures = new ArrayList<>();
 
-  public RawModel loadToModel(FloatBuffer positions, FloatBuffer texCords, FloatBuffer normals, IntBuffer indices) {
+  public RawModel loadModel(FloatBuffer positions, FloatBuffer texCords, FloatBuffer normals, IntBuffer indices) {
     int vao = createVao();
     bindIndicesBuffer(indices);
     storeVboInVao(0, 3, positions);
@@ -58,9 +57,9 @@ public class ModelLoader {
     GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, w, h, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, image);
 
     ByteBuffer input_pixels = image;
-    int        input_w      = w;
-    int        input_h      = h;
-    int        mipmapLevel  = 0;
+    int input_w = w;
+    int input_h = h;
+    int mipmapLevel = 0;
     while (1 < input_w || 1 < input_h) {
       int output_w = Math.max(1, input_w >> 1);
       int output_h = Math.max(1, input_h >> 1);

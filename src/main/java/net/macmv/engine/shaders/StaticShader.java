@@ -1,12 +1,12 @@
-package net.macmv.lwjgltest.shaders;
+package net.macmv.engine.shaders;
 
-import net.macmv.lwjgltest.engine.Light;
+import net.macmv.engine.engine.Light;
 import org.joml.Matrix4f;
 
 public class StaticShader extends ShaderProgram {
 
-  private static final String vertexFile = "src/main/java/net/macmv/lwjgltest/shaders/vertexShader.glsl";
-  private static final String fragmentFile = "src/main/java/net/macmv/lwjgltest/shaders/fragmentShader.glsl";
+  private static final String vertexFile = "src/main/java/net/macmv/engine/shaders/vertexShader.glsl";
+  private static final String fragmentFile = "src/main/java/net/macmv/engine/shaders/fragmentShader.glsl";
 
   private int transform;
   private int projection;

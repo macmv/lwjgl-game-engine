@@ -1,4 +1,4 @@
-package net.macmv.lwjgltest.engine;
+package net.macmv.engine.engine;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
@@ -78,7 +78,7 @@ public class Display {
 
     long sleepTime = 1000000000 / fps; // nanoseconds to sleep this frame
     // yieldTime + remainder micro & nano seconds if smaller than sleepTime
-    long yieldTime = Math.min(sleepTime, variableYieldTime + sleepTime % (1000*1000));
+    long yieldTime = Math.min(sleepTime, variableYieldTime + sleepTime % (1000 * 1000));
     long overSleep = 0; // time the sync goes over by
 
     try {
@@ -103,10 +103,10 @@ public class Display {
       // auto tune the time sync should yield
       if (overSleep > variableYieldTime) {
         // increase by 200 microseconds (1/5 a ms)
-        variableYieldTime = Math.min(variableYieldTime + 200*1000, sleepTime);
+        variableYieldTime = Math.min(variableYieldTime + 200 * 1000, sleepTime);
       } else if (overSleep < variableYieldTime - 200 * 1000) {
         // decrease by 2 microseconds
-        variableYieldTime = Math.max(variableYieldTime - 2*1000, 0);
+        variableYieldTime = Math.max(variableYieldTime - 2 * 1000, 0);
       }
     }
   }

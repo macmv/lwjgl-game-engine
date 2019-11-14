@@ -1,4 +1,4 @@
-package net.macmv.lwjgltest.model;
+package net.macmv.engine.model;
 
 public class RawModel {
   private final int vaoID;

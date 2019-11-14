@@ -1,4 +1,4 @@
-package net.macmv.lwjgltest.shaders;
+package net.macmv.engine.shaders;
 
 import org.joml.Matrix4f;
 import org.joml.Vector3f;

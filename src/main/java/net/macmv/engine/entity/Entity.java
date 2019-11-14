@@ -1,23 +1,23 @@
-package net.macmv.lwjgltest.entity;
+package net.macmv.engine.entity;
 
-import net.macmv.lwjgltest.model.TextureModel;
+import net.macmv.engine.model.Model;
 import org.joml.Matrix4f;
 
 public class Entity {
-  private final TextureModel model;
+  private final Model model;
   private final Matrix4f transform;
 
-  public Entity(TextureModel model, Matrix4f transform) {
+  public Entity(Model model, Matrix4f transform) {
     this.model = model;
     this.transform = transform;
   }
 
-  public Entity(TextureModel model) {
+  public Entity(Model model) {
     this.model = model;
     this.transform = new Matrix4f();
   }
 
-  public TextureModel getModel() {
+  public Model getModel() {
     return model;
   }
 
