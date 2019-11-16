@@ -2,21 +2,21 @@ package net.macmv.engine.engine;
 
 import net.macmv.engine.entity.Entity;
 import net.macmv.engine.model.ModelBatch;
-import net.macmv.engine.shaders.StaticShader;
+import net.macmv.engine.shaders.FlatShader;
 import org.joml.Vector3f;
 
 public abstract class Game {
   private final Render render;
-  private final StaticShader shader;
+  private final FlatShader shader;
   private final Light light;
   private final InputManager input;
   private final ModelBatch modelBatch = new ModelBatch();
 
   public Game() {
     render = new Render();
-    shader = new StaticShader();
+    shader = new FlatShader();
     input = new InputManager(render);
-    light = new Light(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+    light = new Light(new Vector3f(0, 10, 0), new Vector3f(1, 1, 1));
   }
 
   public void run() {

@@ -1,7 +1,7 @@
 package net.macmv.engine.engine;
 
 import net.macmv.engine.entity.Entity;
-import net.macmv.engine.shaders.StaticShader;
+import net.macmv.engine.shaders.FlatShader;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -50,7 +50,7 @@ public class Render {
     display.close();
   }
 
-  public void render(Entity model, StaticShader shader, Light light) {
+  public void render(Entity model, FlatShader shader, Light light) {
     shader.start();
     GL30.glBindVertexArray(model.getModel().getModel().getVaoID());
     GL20.glEnableVertexAttribArray(0);
