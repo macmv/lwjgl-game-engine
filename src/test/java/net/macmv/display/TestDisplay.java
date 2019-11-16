@@ -12,7 +12,7 @@ public class TestDisplay extends Game {
 
   @Override
   public void init() {
-    getModelBatch().load("model", "model.obj", "modelTex.png");
+    getModelBatch().load("model", "/model.obj", "/modelTex.png");
     e = new Entity(getModelBatch().get("model"));
     e.getTransform().setTranslation(0, 0, -10);
   }

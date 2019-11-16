@@ -6,9 +6,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.FloatBuffer;
 
 public abstract class ShaderProgram {
@@ -33,7 +31,8 @@ public abstract class ShaderProgram {
   private static int loadShader(String file, int type) {
     StringBuilder source = new StringBuilder();
     try {
-      BufferedReader r = new BufferedReader(new FileReader(file));
+      InputStream in = ShaderProgram.class.getResourceAsStream(file);
+      BufferedReader r = new BufferedReader(new InputStreamReader(in));
       String line;
       while ((line = r.readLine()) != null) {
         source.append(line).append("\n");
@@ -46,7 +45,7 @@ public abstract class ShaderProgram {
     GL20.glShaderSource(shader, source);
     GL20.glCompileShader(shader);
     if (GL20.glGetShaderi(shader, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
-      System.out.println(GL20.glGetShaderInfoLog(shader, 500));
+      System.err.println(GL20.glGetShaderInfoLog(shader, 500));
       System.err.println("Could not compile shader");
       System.exit(-1);
     }

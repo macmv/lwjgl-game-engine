@@ -5,8 +5,8 @@ import org.joml.Matrix4f;
 
 public class StaticShader extends ShaderProgram {
 
-  private static final String vertexFile = "src/main/java/net/macmv/engine/shaders/vertexShader.glsl";
-  private static final String fragmentFile = "src/main/java/net/macmv/engine/shaders/fragmentShader.glsl";
+  private static final String vertexFile = "/shaders/vertexShader.glsl";
+  private static final String fragmentFile = "/shaders/fragmentShader.glsl";
 
   private int transform;
   private int projection;

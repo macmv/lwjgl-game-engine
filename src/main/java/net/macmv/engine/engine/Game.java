@@ -22,8 +22,8 @@ public abstract class Game {
   public void run() {
     init();
     while (render.getDisplay().isOpen()) {
-      render.prepare();
       input.update();
+      render.prepare();
       update();
       render.update();
     }

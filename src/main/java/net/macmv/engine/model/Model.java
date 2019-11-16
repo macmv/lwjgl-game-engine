@@ -6,7 +6,7 @@ public class Model {
   private final int tex;
 
   private float roughness = 0;
-  private float damping = 1;
+  private float damping = 100;
 
   public Model(RawModel model, int tex) {
     this.model = model;
