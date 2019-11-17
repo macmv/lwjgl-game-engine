@@ -19,16 +19,16 @@ public class InputManager {
   public void update() {
     float speed = 0.02f;
     if (render.getDisplay().isKeyDown(GLFW.GLFW_KEY_W)) {
-      cam.move(0, 0, -speed);
+      cam.move(speed, 0, 0);
     }
     if (render.getDisplay().isKeyDown(GLFW.GLFW_KEY_A)) {
-      cam.move(-speed, 0, 0);
-    }
-    if (render.getDisplay().isKeyDown(GLFW.GLFW_KEY_S)) {
       cam.move(0, 0, speed);
     }
+    if (render.getDisplay().isKeyDown(GLFW.GLFW_KEY_S)) {
+      cam.move(-speed, 0, 0);
+    }
     if (render.getDisplay().isKeyDown(GLFW.GLFW_KEY_D)) {
-      cam.move(speed, 0, 0);
+      cam.move(0, 0, -speed);
     }
     if (render.getDisplay().isKeyDown(GLFW.GLFW_KEY_SPACE)) {
       cam.move(0, speed, 0);
@@ -43,7 +43,7 @@ public class InputManager {
     oldX = newX;
     oldY = newY;
     if (render.getDisplay().isMouseDown()) {
-//      cam.rotate(dx, dy);
+      cam.rotate(dx, dy);
     }
   }
 }
