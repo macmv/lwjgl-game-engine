@@ -1,22 +1,23 @@
 package net.macmv.engine.engine;
 
 import net.macmv.engine.entity.Entity;
+import net.macmv.engine.input.BasicInput;
+import net.macmv.engine.input.InputManager;
 import net.macmv.engine.model.ModelBatch;
 import net.macmv.engine.shaders.FlatShader;
 import org.joml.Vector3f;
 
 public abstract class Game {
   private final Render render;
-  private final FlatShader shader;
   private final Light light;
-  private final InputManager input;
-  private final ModelBatch modelBatch = new ModelBatch();
+  private final ModelBatch modelBatch;
+  private InputManager input;
 
   public Game() {
     render = new Render();
-    shader = new FlatShader();
-    input = new InputManager(render);
-    light = new Light(new Vector3f(0, 10, 0), new Vector3f(1, 1, 1));
+    light = new Light(new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+    input = new BasicInput(this, render.getCam());
+    modelBatch = new ModelBatch();
   }
 
   public void run() {
@@ -33,15 +34,30 @@ public abstract class Game {
   private void dispose() {
     modelBatch.dispose();
     render.dispose();
-    shader.dispose();
   }
 
   public void render(Entity object) {
-    render.render(object, shader, light);
+    render.render(object, light);
   }
 
   public ModelBatch getModelBatch() {
     return modelBatch;
+  }
+
+  public Render getRender() {
+    return render;
+  }
+
+  public InputManager getInput() {
+    return input;
+  }
+
+  public void setInput(InputManager input) {
+    this.input = input;
+  }
+
+  public Camera getCamera() {
+    return render.getCam();
   }
 
   public abstract void init();

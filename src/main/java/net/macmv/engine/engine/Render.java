@@ -1,7 +1,9 @@
 package net.macmv.engine.engine;
 
 import net.macmv.engine.entity.Entity;
+import net.macmv.engine.shaders.BasicShader;
 import net.macmv.engine.shaders.FlatShader;
+import net.macmv.engine.shaders.ShaderProgram;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -13,7 +15,7 @@ public class Render {
 
   private final float FOV = 70;
   private final float NEAR_PLANE = 0.1f;
-  private final float FAR_PLANE = 100;
+  private final float FAR_PLANE = 1000;
 
   private final Matrix4f projectionMatrix;
 
@@ -50,20 +52,21 @@ public class Render {
     display.close();
   }
 
-  public void render(Entity model, FlatShader shader, Light light) {
+  public void render(Entity entity, Light light) {
+    BasicShader shader = entity.getModel().getShader();
     shader.start();
-    GL30.glBindVertexArray(model.getModel().getModel().getVaoID());
+    GL30.glBindVertexArray(entity.getModel().getRawModel().getVaoID());
     GL20.glEnableVertexAttribArray(0);
     GL20.glEnableVertexAttribArray(1);
     GL20.glEnableVertexAttribArray(2);
     shader.loadProjection(projectionMatrix);
     shader.loadView(cam.getViewMatrix());
-    shader.loadTransform(model.getTransform());
-    shader.loadRoughness(model.getModel().getRoughness(), model.getModel().getDamping());
+    shader.loadTransform(entity.getTransform());
+    shader.loadRoughness(entity.getModel().getRoughness(), entity.getModel().getDamping());
     shader.loadLight(light);
     GL13.glActiveTexture(GL13.GL_TEXTURE0);
-    GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getModel().getTex());
-    GL11.glDrawElements(GL11.GL_TRIANGLES, model.getModel().getModel().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
+    GL11.glBindTexture(GL11.GL_TEXTURE_2D, entity.getModel().getTex());
+    GL11.glDrawElements(GL11.GL_TRIANGLES, entity.getModel().getRawModel().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
     GL20.glDisableVertexAttribArray(0);
     GL20.glDisableVertexAttribArray(1);
     GL20.glDisableVertexAttribArray(2);

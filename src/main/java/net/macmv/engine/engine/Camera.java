@@ -42,7 +42,6 @@ public class Camera {
             new Vector4f(x.y, y.y, z.y, 0),
             new Vector4f(x.z, y.z, z.z, 0),
             new Vector4f(x.dot(loc), y.dot(loc), z.dot(loc), 1));
-    System.out.println("mat: " + viewMatrix);
   }
 
   public Matrix4f getViewMatrix() {
