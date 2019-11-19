@@ -1,6 +1,6 @@
 #version 400 core
 
-flat in vec4 pass_color;
+in vec4 pass_color;
 
 out vec4 out_color;
 

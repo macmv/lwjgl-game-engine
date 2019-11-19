@@ -5,8 +5,12 @@ import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL32;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 
 public abstract class ShaderProgram {
@@ -14,14 +18,19 @@ public abstract class ShaderProgram {
   private static FloatBuffer matBuf = BufferUtils.createFloatBuffer(16);
   private int program;
   private int vertexShader;
+  private int geometryShader;
   private int fragmentShader;
 
-  public ShaderProgram(String vertexFile, String fragmentFile) {
+  public ShaderProgram(String vertexFile, String geometryFile, String fragmentFile) {
     vertexShader = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
     fragmentShader = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
     program = GL20.glCreateProgram();
     GL20.glAttachShader(program, vertexShader);
     GL20.glAttachShader(program, fragmentShader);
+    if (geometryFile != null) {
+      geometryShader = loadShader(geometryFile, GL32.GL_GEOMETRY_SHADER);
+      GL20.glAttachShader(program, geometryShader);
+    }
     bindAttributes();
     GL20.glLinkProgram(program);
     GL20.glValidateProgram(program);
@@ -69,8 +78,10 @@ public abstract class ShaderProgram {
   public void dispose() {
     stop();
     GL20.glDetachShader(program, vertexShader);
+    GL20.glDetachShader(program, geometryShader);
     GL20.glDetachShader(program, fragmentShader);
     GL20.glDeleteShader(vertexShader);
+    GL20.glDeleteShader(geometryShader);
     GL20.glDeleteShader(fragmentShader);
     GL20.glDeleteProgram(program);
   }

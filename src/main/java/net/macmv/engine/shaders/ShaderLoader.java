@@ -16,4 +16,8 @@ public class ShaderLoader {
   public BasicShader get(Model.Type type) {
     return shaders.get(type);
   }
+
+  public void dispose() {
+    shaders.forEach((t, s) -> s.dispose());
+  }
 }

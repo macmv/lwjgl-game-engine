@@ -5,6 +5,6 @@ public class FlatShader extends BasicShader {
   private static final String fragmentFile = "/shaders/flatFragmentShader.glsl";
 
   public FlatShader() {
-    super(vertexFile, fragmentFile);
+    super(vertexFile, null, fragmentFile);
   }
 }

@@ -13,8 +13,8 @@ public abstract class BasicShader extends ShaderProgram {
   private int damping;
   private int time;
 
-  public BasicShader(String vertexFile, String fragmentFile) {
-    super(vertexFile, fragmentFile);
+  public BasicShader(String vertexFile, String geometryFile, String fragmentFile) {
+    super(vertexFile, geometryFile, fragmentFile);
   }
 
   @Override

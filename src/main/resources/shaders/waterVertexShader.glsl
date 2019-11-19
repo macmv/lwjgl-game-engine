@@ -4,44 +4,21 @@ in vec3 vertex;
 in vec2 texCord;
 in vec3 normal;
 
-flat out vec4 pass_color;
-
-uniform sampler2D tex;
-
-uniform vec3 lightColor;
-uniform float roughness;
-uniform float damping;
-
-uniform mat4 transform;
-uniform mat4 projection;
-uniform mat4 view;
-
-uniform vec3 lightPos;
+out vec2 pass_texCord;
 
 uniform int time;
+uniform mat4 transform;
 
 void main() {
   vec4 worldPos = transform * vec4(vertex, 1);
+  gl_Position = worldPos;
 
-  vec3 surfaceNormal = (transform * vec4(normal, 0)).xyz;
-  vec3 lightVector = lightPos - worldPos.xyz;
-  vec3 cameraVector = (inverse(view) * vec4(0, 0, 0, 1)).xyz - worldPos.xyz;
+  //vec3 surfaceNormal = (transform * vec4(normal, 0)).xyz;
 
-  worldPos.xyz += (normalize(worldPos.xyz - vec3(0, 0, 0)) * sin(time / 1000.0f + mod(worldPos.x * 1000, 100))) / 10f;
-  gl_Position = projection * view * worldPos;
+  //worldPos.xyz += (surfaceNormal * sin(time / 1000.0f + mod(worldPos.x * 1000, 100))) / 10f;
+//  gl_Position = worldPos;
 
-  vec3 unitNormal = normalize(surfaceNormal);
-  vec3 unitLight = normalize(lightVector);
-
-  float light = max(dot(unitNormal, unitLight), 0.2);
-  vec3 diffuse = light * lightColor;
-
-  vec3 unitCamera = normalize(cameraVector);
-  vec3 reflectedLight = reflect(-unitLight, unitNormal);
-
-  float specularFac = max(dot(reflectedLight, unitCamera), 0);
-  specularFac = pow(specularFac, damping);
-  vec3 specular = specularFac * lightColor * (-roughness + 1);
-
-  pass_color = vec4(diffuse, 1) * texture(tex, texCord) + vec4(specular, 1);
+//  gl_Position = projection * view * worldPos;
+//  gl_Position = worldPos;
+//  pass_texCord = texCord;
 }

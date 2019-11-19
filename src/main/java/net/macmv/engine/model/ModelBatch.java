@@ -41,5 +41,6 @@ public class ModelBatch {
 
   public void dispose() {
     modelLoader.dispose();
+    shaderLoader.dispose();
   }
 }
