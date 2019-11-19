@@ -64,6 +64,7 @@ public class Render {
     shader.loadTransform(entity.getTransform());
     shader.loadRoughness(entity.getModel().getRoughness(), entity.getModel().getDamping());
     shader.loadLight(light);
+    shader.loadTime();
     GL13.glActiveTexture(GL13.GL_TEXTURE0);
     GL11.glBindTexture(GL11.GL_TEXTURE_2D, entity.getModel().getTex());
     GL11.glDrawElements(GL11.GL_TRIANGLES, entity.getModel().getRawModel().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);

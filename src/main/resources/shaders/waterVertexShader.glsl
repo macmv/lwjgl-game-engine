@@ -18,13 +18,17 @@ uniform mat4 view;
 
 uniform vec3 lightPos;
 
+uniform int time;
+
 void main() {
   vec4 worldPos = transform * vec4(vertex, 1);
-  gl_Position = projection * view * worldPos;
 
   vec3 surfaceNormal = (transform * vec4(normal, 0)).xyz;
   vec3 lightVector = lightPos - worldPos.xyz;
   vec3 cameraVector = (inverse(view) * vec4(0, 0, 0, 1)).xyz - worldPos.xyz;
+
+  worldPos.xyz += (normalize(worldPos.xyz - vec3(0, 0, 0)) * sin(time / 1000.0f + mod(worldPos.x * 1000, 100))) / 10f;
+  gl_Position = projection * view * worldPos;
 
   vec3 unitNormal = normalize(surfaceNormal);
   vec3 unitLight = normalize(lightVector);

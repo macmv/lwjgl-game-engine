@@ -11,6 +11,7 @@ public abstract class BasicShader extends ShaderProgram {
   private int lightColor;
   private int roughness;
   private int damping;
+  private int time;
 
   public BasicShader(String vertexFile, String fragmentFile) {
     super(vertexFile, fragmentFile);
@@ -18,41 +19,46 @@ public abstract class BasicShader extends ShaderProgram {
 
   @Override
   protected void getAllUniformLocations() {
-    transform = super.getUniformLocation("transform");
-    projection = super.getUniformLocation("projection");
-    view = super.getUniformLocation("view");
-    lightPos = super.getUniformLocation("lightPos");
-    lightColor = super.getUniformLocation("lightColor");
-    roughness = super.getUniformLocation("roughness");
-    damping = super.getUniformLocation("damping");
+    transform = getUniformLocation("transform");
+    projection = getUniformLocation("projection");
+    view = getUniformLocation("view");
+    lightPos = getUniformLocation("lightPos");
+    lightColor = getUniformLocation("lightColor");
+    roughness = getUniformLocation("roughness");
+    damping = getUniformLocation("damping");
+    time = getUniformLocation("time");
   }
 
   @Override
   protected void bindAttributes() {
-    super.bindAttribute(0, "position");
-    super.bindAttribute(1, "texCord");
-    super.bindAttribute(2, "normal");
+    bindAttribute(0, "position");
+    bindAttribute(1, "texCord");
+    bindAttribute(2, "normal");
   }
 
   public void loadRoughness(float roughness, float damping) {
-    super.loadFloat(this.roughness, roughness);
-    super.loadFloat(this.damping, damping);
+    loadFloat(this.roughness, roughness);
+    loadFloat(this.damping, damping);
   }
 
   public void loadLight(Light light) {
-    super.loadVector(lightColor, light.getColor());
-    super.loadVector(lightPos, light.getPos());
+    loadVector(lightColor, light.getColor());
+    loadVector(lightPos, light.getPos());
   }
 
   public void loadTransform(Matrix4f mat) {
-    super.loadMatrix(transform, mat);
+    loadMatrix(transform, mat);
   }
 
   public void loadProjection(Matrix4f mat) {
-    super.loadMatrix(projection, mat);
+    loadMatrix(projection, mat);
   }
 
   public void loadView(Matrix4f mat) {
-    super.loadMatrix(view, mat);
+    loadMatrix(view, mat);
+  }
+
+  public void loadTime() {
+    loadInt(time, (int) (System.currentTimeMillis() % 100000));
   }
 }
